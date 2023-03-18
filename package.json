@@ -1,0 +1,22 @@
+{
+  "name": "chatfile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ava": "^5.2.0",
+    "esbuild": "^0.17.12",
+    "esbuild-runner": "^2.2.2",
+    "make-vfs": "^1.0.5",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
+}
