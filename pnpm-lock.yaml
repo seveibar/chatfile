@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/node': ^18.15.3
   ava: ^5.2.0
   esbuild: ^0.17.12
   esbuild-runner: ^2.2.2
@@ -16,6 +17,7 @@ dependencies:
   openai: 3.2.1
 
 devDependencies:
+  '@types/node': 18.15.3
   prettier: 2.8.4
 
 packages:
@@ -462,7 +464,6 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
-    dev: false
 
   /@types/prettier/2.7.2:
     resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
