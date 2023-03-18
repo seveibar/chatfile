@@ -34,9 +34,10 @@ export type LoadFilesInstruction = {
 
 export type SummarizeFilesInstruction = {
   instruction_type: "SUMMARIZE_FILES"
-  target_dir: string
-  dest_file: string
+  read_dir: string
+  dest_summary_file: string
   token_limit?: number
+  _debug_output_dir?: string
 }
 
 export type Instruction =
