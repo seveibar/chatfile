@@ -12,6 +12,7 @@ export const getSentenceFileSummary = async (
   },
   helpers: ExecutionHelpers
 ) => {
+  if (file.trim().length === 0) return "empty file"
   // TODO Different logic for short vs long files
   const is_long_file = file.split("\n").length > 100
 
@@ -20,7 +21,7 @@ export const getSentenceFileSummary = async (
     prompt += `The summary should help with identifying if this file is relevant for answering the question "${context_prompt}".`
   }
 
-  prompt += `\n\n${file}`
+  prompt += `\n\nfile content:\n${file}`
 
   const result = await helpers.getCachedPrompt(engine, prompt)
 

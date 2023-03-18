@@ -12,6 +12,7 @@ export const getExecutionHelpers = async () => {
     async getCachedPrompt(engine: string, user_prompt: string) {
       const cached_result = await storage.getItem(`${engine}:${user_prompt}`)
       if (cached_result) return cached_result
+      console.log(`Submitting prompt "${user_prompt.slice(0, 20)}"...`)
       const response = await this.openai.createChatCompletion({
         messages: [
           {
