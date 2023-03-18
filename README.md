@@ -1,6 +1,4 @@
-# Prompter
-
-Prompter is an interpreter for Chatfiles
+# Chatfile
 
 A Chatfile is similar to a Dockerfile, but is used for automatically constructing
 ChatGPT prompts using reference content and summarization.
