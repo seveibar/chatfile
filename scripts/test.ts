@@ -6,6 +6,7 @@ import {
 
 async function main() {
   const ctx = createExecutionContext()
+  ctx.context_prompt = "Finish Chatfile parser"
   await instruction_functions.SUMMARIZE_FILES(
     ctx,
     {
