@@ -54,5 +54,6 @@ export type Instruction =
   | FindReleventFilesInstruction
   | LoadFilesInstruction
   | BreakdownTaskInstruction
+  | SummarizeFilesInstruction
 
 export type InstructionType = Instruction["instruction_type"]
