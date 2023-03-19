@@ -11,3 +11,5 @@ yarn-error.log
 .yalc
 yalc.lock
 .node-persist
+static-src
+debug

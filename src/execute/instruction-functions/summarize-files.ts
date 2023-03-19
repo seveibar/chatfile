@@ -1,3 +1,4 @@
+import { getFullDirectorySummary } from "./../../openai/get-full-directory-summary"
 import { ExecutionContext } from "execute/execution-context"
 import { ExecutionHelpers } from "execute/execution-helpers"
 import { SummarizeFilesInstruction } from "types/instruction"
@@ -20,40 +21,28 @@ export const SUMMARIZE_FILES = async (
   instruction: SummarizeFilesInstruction,
   helpers: ExecutionHelpers
 ) => {
-  const token_limit = instruction.token_limit ?? context.token_limit
-  const context_prompt = context.context_prompt ?? context.objective_prompt
-  const { read_dir, dest_summary_file, _debug_output_dir } = instruction
+  helpers.configureDebug(context, instruction._debug_output_dir)
 
-  const target_vfs = await getVirtualFileSystemFromDirPath({
+  const token_limit = instruction.token_limit ?? context.token_limit
+  const context_prompt =
+    context.context_prompt ?? context.objective_prompt ?? ""
+  const { read_dir, dest_summary_file, _debug_output_dir } = instruction
+  const { engine } = context
+
+  const target_vfs = (await getVirtualFileSystemFromDirPath({
     dirPath: read_dir,
     contentFormat: "string",
-  })
+  })) as Record<string, string>
 
   // For each file, summarize the content according to the prompt
-  const file_summary_lines: Array<string> = []
-  const $summaries = []
-  for (const [file_path, file_content] of Object.entries(target_vfs)) {
-    $summaries.push(
-      (async () => {
-        const summary = await getSentenceFileSummary(
-          {
-            file: file_content as string,
-            engine: context.engine,
-            context_prompt,
-          },
-          helpers
-        )
-        if (_debug_output_dir) {
-          context.vfs[
-            `${_debug_output_dir}/file-summaries/${file_path}.summary.txt`
-          ] = summary
-        }
-        file_summary_lines.push(`${file_path}: ${summary}\n`)
-      })()
-    )
-  }
-  await Promise.all($summaries)
-  const full_summary_file = file_summary_lines.sort().join("\n").trim()
+  const full_summary_file = await getFullDirectorySummary(
+    {
+      vfs: target_vfs,
+      engine,
+      context_prompt,
+    },
+    helpers
+  )
 
   if (_debug_output_dir) {
     context.vfs[`${_debug_output_dir}/full-summary.txt`] = full_summary_file

@@ -32,6 +32,12 @@ export type LoadFilesInstruction = {
   dest_file: string
 }
 
+export type BreakdownTaskInstruction = {
+  instruction_type: "BREAKDOWN_TASK"
+  read_dir: string
+  _debug_output_dir?: string
+}
+
 export type SummarizeFilesInstruction = {
   instruction_type: "SUMMARIZE_FILES"
   read_dir: string
@@ -47,5 +53,6 @@ export type Instruction =
   | SummarizeDirectoryInstruction
   | FindReleventFilesInstruction
   | LoadFilesInstruction
+  | BreakdownTaskInstruction
 
 export type InstructionType = Instruction["instruction_type"]
