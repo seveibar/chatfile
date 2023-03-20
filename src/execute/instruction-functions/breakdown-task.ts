@@ -73,10 +73,20 @@ export const BREAKDOWN_TASK = async (
       .join("\n\n")}`
   )
 
-  console.log(task_breakdown_with_context)
-
   helpers.logDebugFile(
     "task-breakdown-with-context.txt",
     task_breakdown_with_context
   )
+
+  const task_breakdown_with_context_json_res = await helpers.getCachedPrompt(
+    context.engine,
+    `Convert the following task breakdown with context to JSON in the format Array<{modification: string, context_files: Array<string>, file_to_modify: string}>:\n\n${task_breakdown_with_context}`
+  )
+
+  helpers.logDebugFile(
+    "task-breakdown-with-context.json",
+    task_breakdown_with_context_json_res
+  )
+
+  const task_breakdown = JSON.parse(task_breakdown_with_context_json_res)
 }

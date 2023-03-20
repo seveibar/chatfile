@@ -15,6 +15,11 @@ sign in.
 ENGINE gpt-3.5-turbo
 TOKEN_LIMIT 4000
 
+FILE_CHECKER 'tsc --noEmit'
+RESPONSE_FORMATTER 'prettier'
+
+BREAKDOWN_TASK
+
 SUMMARIZE_FILES ./src /prompt/relevant-files
 
 ENGINE gpt-4
